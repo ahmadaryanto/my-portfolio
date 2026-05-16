@@ -11,6 +11,14 @@
   --border-strong: rgba(180, 149, 255, 0.32);
   --shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
   --max-width: 1180px;
+  --container-gutter: clamp(18px, 3.2vw, 40px);
+  --section-space: clamp(60px, 9vw, 96px);
+  --panel-radius: clamp(20px, 2.4vw, 32px);
+  --panel-padding: clamp(18px, 2.4vw, 28px);
+  --touch-target: 48px;
+  --body-size: clamp(0.97rem, 0.3vw + 0.92rem, 1.04rem);
+  --lead-size: clamp(1.04rem, 0.7vw + 0.94rem, 1.18rem);
+  --small-size: clamp(0.78rem, 0.25vw + 0.74rem, 0.92rem);
 }
 
 * {
@@ -23,6 +31,8 @@
 }
 
 html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
 }
 
@@ -32,6 +42,7 @@ body {
   font-family: "Manrope", sans-serif;
   line-height: 1.6;
   color: var(--text);
+  font-size: var(--body-size);
   background:
     radial-gradient(circle at top left, rgba(141, 99, 255, 0.18), transparent 28%),
     radial-gradient(circle at 82% 8%, rgba(255, 255, 255, 0.05), transparent 18%),
@@ -65,7 +76,7 @@ img {
 }
 
 .container {
-  width: min(calc(100% - 40px), var(--max-width));
+  width: min(calc(100% - (var(--container-gutter) * 2)), var(--max-width));
   margin: 0 auto;
 }
 
@@ -114,13 +125,17 @@ h3,
   justify-content: flex-end;
   gap: 12px;
   color: var(--muted);
-  font-size: 0.92rem;
+  font-size: var(--small-size);
 }
 
 .site-nav a {
+  min-height: var(--touch-target);
   padding: 9px 14px;
   border: 1px solid transparent;
   border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease;
 }
 
@@ -140,7 +155,7 @@ button:focus-visible {
 
 .section {
   position: relative;
-  padding: 96px 0;
+  padding: var(--section-space) 0;
 }
 
 .section[id] {
@@ -188,6 +203,11 @@ button:focus-visible {
 }
 
 .hero-copy,
+.profile-copy {
+  max-width: 100%;
+}
+
+.hero-copy,
 .profile-copy,
 .experience-intro,
 .experience-body,
@@ -215,6 +235,7 @@ button:focus-visible {
   justify-content: center;
   overflow: hidden;
   border-radius: 36px;
+  width: 100%;
   transform: translateY(calc(var(--parallax-shift, 0) * 1px));
   transition: transform 220ms ease, box-shadow 220ms ease;
 }
@@ -305,9 +326,19 @@ p {
   margin-top: 0;
 }
 
+.hero-copy h1 {
+  font-size: clamp(4.2rem, 8vw, 7.6rem);
+  line-height: 0.92;
+  overflow-wrap: anywhere;
+}
+
 p,
 li {
   overflow-wrap: break-word;
+}
+
+p {
+  margin-bottom: 0;
 }
 
 .eyebrow {
@@ -315,7 +346,7 @@ li {
   color: var(--accent-strong);
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  font-size: 0.74rem;
+  font-size: clamp(0.68rem, 0.2vw + 0.66rem, 0.78rem);
   font-weight: 700;
 }
 
@@ -360,7 +391,7 @@ h3 {
 .hero-text {
   max-width: 18ch;
   margin-bottom: 0;
-  font-size: clamp(1.3rem, 2vw, 1.6rem);
+  font-size: clamp(1.12rem, 1vw + 0.96rem, 1.55rem);
   line-height: 1.45;
 }
 
@@ -370,14 +401,14 @@ h3 {
 .highlight-card li,
 .mini-panel p {
   line-height: 1.8;
-  font-size: 1rem;
+  font-size: var(--body-size);
 }
 
 .profile-lead {
   margin-bottom: 20px;
   max-width: 56ch;
-  font-size: 1.15rem;
-  line-height: 1.8;
+  font-size: var(--lead-size);
+  line-height: 1.75;
 }
 
 .profile-copy {
@@ -400,7 +431,7 @@ h3 {
 }
 
 .profile-detail {
-  padding: 18px 20px;
+  padding: clamp(16px, 1.8vw, 20px);
   border: 1px solid var(--border);
   border-radius: 24px;
   background: rgba(141, 99, 255, 0.08);
@@ -428,7 +459,7 @@ h3 {
 .profile-detail strong {
   display: block;
   color: var(--text);
-  font-size: 1rem;
+  font-size: clamp(0.96rem, 0.3vw + 0.92rem, 1.02rem);
   font-weight: 700;
 }
 
@@ -443,9 +474,9 @@ h3 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 54px;
+  min-height: clamp(48px, 5vw, 54px);
   margin-top: 8px;
-  padding: 0 24px;
+  padding: 0 clamp(18px, 2.8vw, 24px);
   border: 1px solid var(--text);
   border-radius: 999px;
   background: var(--text);
@@ -453,7 +484,7 @@ h3 {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  font-size: 0.77rem;
+  font-size: clamp(0.72rem, 0.18vw + 0.7rem, 0.8rem);
   line-height: 1.25;
   text-align: center;
   cursor: pointer;
@@ -487,8 +518,8 @@ h3 {
 .role-card,
 .highlight-card,
 .mini-panel {
-  padding: 22px;
-  border-radius: 28px;
+  padding: var(--panel-padding);
+  border-radius: var(--panel-radius);
 }
 
 .role-card {
@@ -514,7 +545,8 @@ h3 {
 }
 
 .contact-row a {
-  min-height: 48px;
+  min-height: var(--touch-target);
+  flex: 1 1 220px;
   min-width: 0;
   display: inline-flex;
   align-items: center;
@@ -587,8 +619,8 @@ h3 {
   align-items: center;
   gap: 12px;
   min-height: 156px;
-  padding: 18px;
-  border-radius: 30px;
+  padding: clamp(16px, 1.8vw, 18px);
+  border-radius: clamp(22px, 2vw, 30px);
   transition: transform 180ms ease, border-color 180ms ease, background-color 180ms ease;
 }
 
@@ -635,6 +667,7 @@ h3 {
   margin: 0;
   max-width: 60ch;
   line-height: 1.85;
+  font-size: clamp(0.98rem, 0.3vw + 0.94rem, 1.06rem);
 }
 
 .experience-timeline {
@@ -666,9 +699,9 @@ h3 {
 .experience-title {
   display: inline-flex;
   width: fit-content;
-  font-size: 2rem;
+  font-size: clamp(1.55rem, 1vw + 1.2rem, 2rem);
   font-weight: 600;
-  line-height: 1;
+  line-height: 1.04;
   transition: color 160ms ease;
 }
 
@@ -774,7 +807,7 @@ h3 {
 }
 
 .marquee-logo-card {
-  flex: 0 0 220px;
+  flex: 0 0 clamp(188px, 18vw, 220px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -807,7 +840,7 @@ h3 {
 
 .marquee-logo-card__sub {
   color: var(--muted);
-  font-size: 0.82rem;
+  font-size: clamp(0.74rem, 0.2vw + 0.72rem, 0.82rem);
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -832,14 +865,14 @@ h3 {
 
 .kpi-card {
   border: 1px solid var(--border);
-  border-radius: 32px;
+  border-radius: clamp(22px, 2.4vw, 32px);
   background: rgba(18, 13, 29, 0.84);
   box-shadow: var(--shadow);
   backdrop-filter: blur(12px);
 }
 
 .kpi-card-text {
-  padding: 28px;
+  padding: clamp(20px, 2.4vw, 28px);
   display: grid;
   align-content: start;
   gap: 14px;
@@ -879,7 +912,7 @@ h3 {
 
 .kpi-stat-card {
   min-width: 0;
-  padding: 26px 24px 24px;
+  padding: clamp(20px, 2vw, 26px) clamp(18px, 2vw, 24px) clamp(18px, 1.8vw, 24px);
   display: grid;
   gap: 10px;
 }
@@ -890,7 +923,7 @@ h3 {
 
 .kpi-stat-label {
   color: var(--text);
-  font-size: 1rem;
+  font-size: clamp(0.94rem, 0.35vw + 0.9rem, 1rem);
   font-weight: 700;
   line-height: 1.35;
 }
@@ -973,7 +1006,7 @@ h3 {
   margin: 0;
   color: var(--muted);
   max-width: 58ch;
-  font-size: 0.98rem;
+  font-size: clamp(0.95rem, 0.2vw + 0.92rem, 1rem);
   line-height: 1.65;
 }
 
@@ -1014,8 +1047,8 @@ h3 {
   display: grid;
   grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
   gap: 26px;
-  padding: 28px;
-  border-radius: 36px;
+  padding: clamp(20px, 2.8vw, 28px);
+  border-radius: clamp(24px, 3vw, 36px);
   align-items: start;
 }
 
@@ -1035,7 +1068,7 @@ h3 {
   align-content: start;
   min-height: 100%;
   border: 1px solid var(--border);
-  border-radius: 30px;
+  border-radius: clamp(22px, 2.2vw, 30px);
   background: var(--panel);
   box-shadow: var(--shadow);
   backdrop-filter: blur(12px);
@@ -1109,8 +1142,37 @@ h3 {
   margin: 0;
   padding: 0 18px 18px;
   color: var(--muted);
-  font-size: 0.92rem;
+  font-size: clamp(0.88rem, 0.2vw + 0.86rem, 0.94rem);
   line-height: 1.7;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  min-height: var(--touch-target);
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: rgba(20, 15, 31, 0.92);
+  color: var(--text);
+}
+
+textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: rgba(184, 176, 203, 0.78);
 }
 
 .beyond-card:not([open]) .beyond-card__detail {
@@ -1273,6 +1335,7 @@ h3 {
 @media (min-width: 1400px) {
   :root {
     --max-width: 1280px;
+    --container-gutter: 40px;
   }
 
   .hero-grid,
@@ -1294,7 +1357,25 @@ h3 {
   }
 }
 
+@media (max-width: 1200px) {
+  .experience-logos {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .beyond-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .profile-details {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 1100px) {
+  :root {
+    --section-space: clamp(56px, 8vw, 82px);
+  }
+
   .experience-logos,
   .contact-box {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1303,6 +1384,10 @@ h3 {
   .hero-grid {
     grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
     gap: 30px;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(3.9rem, 8vw, 6.4rem);
   }
 
   .highlight-card {
@@ -1324,7 +1409,6 @@ h3 {
   .award-row {
     grid-template-columns: minmax(96px, 120px) minmax(0, 1fr);
   }
-
 }
 
 @media (max-width: 900px) {
@@ -1382,11 +1466,49 @@ h3 {
   }
 }
 
-@media (max-width: 640px) {
-  .container {
-    width: min(calc(100% - 22px), var(--max-width));
+@media (max-width: 768px) {
+  :root {
+    --section-space: clamp(52px, 10vw, 72px);
+    --container-gutter: clamp(16px, 4vw, 24px);
   }
 
+  .hero-grid,
+  .profile-page-grid,
+  .experience-section {
+    gap: 24px;
+  }
+
+  .experience-logos,
+  .profile-details {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .role-card strong {
+    font-size: 1.28rem;
+  }
+
+  .experience-logo-card {
+    min-height: 140px;
+  }
+
+  .experience-logo-card img {
+    max-width: 136px;
+    max-height: 64px;
+  }
+
+  .marquee-logo-card {
+    min-height: 108px;
+  }
+
+  .kpi-card-text p,
+  .kpi-stat-card p,
+  .award-row__content p,
+  .beyond-card__detail {
+    line-height: 1.7;
+  }
+}
+
+@media (max-width: 640px) {
   .header-inner {
     align-items: flex-start;
     flex-direction: column;
@@ -1400,14 +1522,10 @@ h3 {
   }
 
   .site-nav a {
-    min-height: 44px;
+    min-height: var(--touch-target);
     justify-content: center;
     text-align: center;
     padding: 8px 12px;
-  }
-
-  .section {
-    padding: 72px 0;
   }
 
   .section::before {
@@ -1457,7 +1575,8 @@ h3 {
     line-height: 1.65;
   }
 
-  h1 {
+  h1,
+  .hero-copy h1 {
     font-size: clamp(3.2rem, 17vw, 4.8rem);
     line-height: 0.9;
   }
@@ -1480,7 +1599,7 @@ h3 {
   .experience-body li,
   .highlight-card li,
   .mini-panel p {
-    font-size: 0.98rem;
+    font-size: clamp(0.96rem, 0.5vw + 0.88rem, 1rem);
   }
 
   .experience-summary {
@@ -1587,7 +1706,33 @@ h3 {
   }
 }
 
+@media (max-width: 520px) {
+  .profile-details,
+  .experience-logos,
+  .beyond-grid,
+  .role-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-row a {
+    flex-basis: 100%;
+  }
+
+  .experience-logo-card,
+  .profile-detail {
+    min-height: 0;
+  }
+
+  .kpi-stat-card strong {
+    font-size: clamp(2.5rem, 12vw, 3.4rem);
+  }
+}
+
 @media (max-width: 460px) {
+  :root {
+    --touch-target: 46px;
+  }
+
   .hero {
     padding-top: 26px;
   }
@@ -1618,6 +1763,10 @@ h3 {
 
   .profile-detail {
     padding: 16px 18px;
+  }
+
+  .button-link {
+    letter-spacing: 0.06em;
   }
 
   .experience-entry {
@@ -1653,16 +1802,12 @@ h3 {
 }
 
 @media (max-width: 420px) {
-  .container {
-    width: min(calc(100% - 18px), var(--max-width));
-  }
-
   .header-inner {
     gap: 14px;
   }
 
-  .section {
-    padding: 60px 0;
+  .brand {
+    font-size: 1.3rem;
   }
 
   .role-card,
@@ -1683,10 +1828,6 @@ h3 {
   .eyebrow {
     letter-spacing: 0.14em;
     font-size: 0.68rem;
-  }
-
-  .brand {
-    font-size: 1.35rem;
   }
 
   .marquee-logo-card img {
