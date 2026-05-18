@@ -1045,15 +1045,33 @@ h3 {
 
 .contact-box {
   display: grid;
-  grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
-  gap: 26px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 22px;
   padding: clamp(20px, 2.8vw, 28px);
   border-radius: clamp(24px, 3vw, 36px);
   align-items: start;
 }
 
+.contact-box__intro {
+  display: grid;
+  gap: 12px;
+  max-width: 48rem;
+}
+
+.contact-box__text {
+  max-width: 46ch;
+}
+
 .contact-box .contact-row {
   margin-top: 6px;
+}
+
+.contact-row--stacked {
+  gap: 14px;
+}
+
+.contact-row--stacked a {
+  flex: 1 1 100%;
 }
 
 .beyond-grid {
@@ -1376,8 +1394,7 @@ textarea::placeholder {
     --section-space: clamp(56px, 8vw, 82px);
   }
 
-  .experience-logos,
-  .contact-box {
+  .experience-logos {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1418,8 +1435,7 @@ textarea::placeholder {
   .profile-page-grid,
   .image-grid,
   .event-grid,
-  .image-grid-two,
-  .contact-box {
+  .image-grid-two {
     grid-template-columns: 1fr;
   }
 
